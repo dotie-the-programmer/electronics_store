@@ -1,0 +1,63 @@
+{% extends 'store/base.html' %}
+
+{% block content %}
+<div class="container py-5">
+  <h2 class="product-title">{{ product.name }}</h2>
+  <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid mb-3 product-image">
+
+  <p><strong class="price-label">Price: ksh</strong> <span class="price-amount">{{ product.price }}</span></p>
+
+  {% if product.description %}
+    <p><strong>Description:</strong> {{ product.description }}</p>
+  {% else %}
+    <p class="text-muted">No description available.</p>
+  {% endif %}
+
+  <a href="{% url 'product_list' %}" class="btn btn-back">Back to List</a>
+</div>
+
+<style>
+  .container.py-5 {
+    max-width: 700px;
+  }
+
+  .product-title {
+    color: #0d6efd; /* Bootstrap primary blue */
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+
+  .product-image {
+    max-height: 400px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(13, 110, 253, 0.3);
+  }
+
+  .price-label {
+    color: #0d6efd;
+    font-weight: 600;
+  }
+
+  .price-amount {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #212529; /* dark text */
+  }
+
+  a.btn-back {
+    background-color: #0d6efd;
+    color: white;
+    padding: 8px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+    margin-top: 1.5rem;
+  }
+
+  a.btn-back:hover {
+    background-color: #084bcc; /* darker blue on hover */
+    color: white;
+  }
+</style>
+{% endblock %}

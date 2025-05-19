@@ -1,0 +1,68 @@
+{% extends 'store/base.html' %}
+
+{% block content %}
+  <div class="container py-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h2>Electronics Product Listing</h2>
+    </div>
+
+    <!-- Create Product Button - placed clearly above -->
+    <div class="mb-4 text-end">
+      <a href="{% url 'create_product' %}" class="btn btn-success btn-lg">+ Add New Product</a>
+    </div>
+
+    <div class="row">
+      {% for product in products %}
+        <div class="col-md-4 mb-4 d-flex justify-content-center">
+          <div class="card shadow-sm h-100" style="max-width: 280px; animation: slideUpFadeIn 0.6s ease forwards; opacity: 0;">
+            {% if product.image %}
+              <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}" style="height: 140px; object-fit: cover; border-radius: 8px 8px 0 0;">
+            {% endif %}
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">{{ product.name }}</h5>
+              <p class="card-text text-muted mb-2">Price:ksh <strong>{{ product.price }}</strong></p>
+              <div class="mt-auto">
+                <a href="{% url 'product_detail' product.id %}" class="btn btn-outline-primary btn-sm mb-2">View</a>
+                <a href="{% url 'edit_product' product.id %}" class="btn btn-primary btn-sm mb-2">Edit</a>
+                <a href="{% url 'delete_product' product.id %}" class="btn btn-danger btn-sm">Delete</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% empty %}
+        <p class="text-center">No products available.</p>
+      {% endfor %}
+    </div>
+  </div>
+
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+
+    /* Prevent overlap by adding bottom padding equal to footer height */
+    .container.py-5 {
+      padding-bottom: 80px !important;
+    }
+
+    /* Slide-in-from-bottom animation */
+    @keyframes slideUpFadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Stagger animation delays for each card */
+    .row .col-md-4:nth-child(1) .card { animation-delay: 0.1s; }
+    .row .col-md-4:nth-child(2) .card { animation-delay: 0.3s; }
+    .row .col-md-4:nth-child(3) .card { animation-delay: 0.5s; }
+    .row .col-md-4:nth-child(4) .card { animation-delay: 0.7s; }
+    .row .col-md-4:nth-child(5) .card { animation-delay: 0.9s; }
+    /* Add more nth-child rules if you expect more products */
+  </style>
+{% endblock %}

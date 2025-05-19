@@ -1,0 +1,53 @@
+{% extends 'store/base.html' %}
+
+{% block content %}
+<div class="container py-5">
+  <h2>{{ title }}</h2>
+  <form method="POST" enctype="multipart/form-data" class="custom-form">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a href="{% url 'product_list' %}" class="btn btn-secondary">Cancel</a>
+  </form>
+</div>
+
+<style>
+  .custom-form {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: auto;
+  }
+
+  .custom-form p {
+    margin-bottom: 1.2rem;
+  }
+
+  .custom-form label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+    color: #333;
+  }
+
+  .custom-form input[type="text"],
+  .custom-form input[type="number"],
+  .custom-form input[type="file"],
+  .custom-form textarea,
+  .custom-form select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+  }
+
+  .custom-form button,
+  .custom-form a.btn {
+    margin-top: 10px;
+    min-width: 120px;
+  }
+</style>
+{% endblock %}
